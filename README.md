@@ -3,6 +3,21 @@
 [googlecolab/colab-mcp](https://github.com/googlecolab/colab-mcp) を Claude Code から使うためのセットアップです。
 colab-mcp は、ローカルで動くエージェント（Claude Code）とブラウザで開いている Google Colab のセッションを橋渡しする MCP サーバーです。
 
+> [!WARNING]
+> **クラウド上の Claude Code（claude.ai/code、Claude アプリからのクラウドセッション等）では動作しません。**
+> 必ず、Colab を開いているブラウザと同じ PC 上で Claude Code を実行してください。
+
+## クラウド環境で動作しない理由
+
+colab-mcp は、Claude Code を動かしているマシン上で MCP サーバーを起動し、**同じマシンのブラウザで開いている Colab のページ**と接続します。
+クラウドセッションでは Claude Code がリモートのコンテナ内で動いているため、次のようになります。
+
+- MCP サーバー自体は起動でき、`open_colab_browser_connection` ツールも表示される
+- しかし、コンテナからあなたの PC のブラウザ（Colab のページ）には到達できないため、**Colab への接続は確立できない**
+- その結果、ノートブックの編集・実行ツールは有効にならない
+
+クラウドセッションでこのリポジトリを開くと `.mcp.json` によりサーバーが起動しますが、上記の理由で実際には利用できません。
+
 ## 前提条件
 
 - **ローカル環境で動く Claude Code**（CLI / デスクトップ / IDE 拡張）
